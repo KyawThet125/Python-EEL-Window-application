@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="app.css" >
+    <link rel="stylesheet" href="main.css">
+
+    <title>MY Restaurnat</title>
+    <link rel="Icon" type="image/gif/jpg/png/ico" href="logo.ico">
+  </head>
+  <body>
+    <!-- navbar start -->
+      <div class="container-fluid bg-dark">
+          <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand text-white" href="#" onclick="managePages('homePage')">My Restaurnat</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Tables
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#" onclick="managePages('tablePage')">All</a>
+                      <a class="dropdown-item" href="#" onclick="managePages('createTablePage')">Create Table</a>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dishes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#" onclick="managePages('dishPage')">All</a>
+                      <a class="dropdown-item" href="#" onclick="managePages('createDishPage')">Create Dish</a>
+                  </li>
+                 <li class="nav-item">
+                  <a class="nav-link text-white" href="#" onclick="managePages('orderPage')">Orders</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link text-white" href="#" onclick="managePages('createOrderPage')">Create Order</a>
+                </li>
+                 
+              </ul>
+             
+            </div>
+          </nav>
+      </div>
+    <!-- navbar end -->
+
+    <div id="homePage" class="container">
+      <h1>Home Page</h1>
+    </div>
+
+    <div id="tablePage" class="container">
+      <h1 class="text-info text-center my-5">Table Page</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="bg-dark text-white">
+            <th scope="col">NO</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBodyData">
+         
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div id="orderPage" class="container">
+      <h1 class="text-info text-center my-5">Order Page</h1>
+      <table class="table table-bordered" id="printOrder">
+        <thead>
+          <tr class="bg-dark text-white">
+            <th scope="col">NO</th>
+            <th scope="col">Table Name</th>
+            <th scope="col">Dish Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Count</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody id="orderTableBody">
+         
+          
+        </tbody>
+        <tbody id="">
+         <tr>
+           <td colspan="5" class="text-right text-info">Grand Total</td>
+           <td id="grandTotal" class="text-muted">Total</td>
+         </tr>
+         <tr>
+           <td colspan="6">
+             <button class="btn btn-success float-right" onclick="billOut()">Bill Out</button>
+           </td>
+         </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div id="dishPage" class="container">
+        <h1 class="text-info text-center my-5">Dish Page</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="bg-dark text-white">
+            <th scope="col">NO</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="dishBodyData">
+         
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div id="createTablePage" class="container">
+      <h1 class="text-info text-center my-5">Create Table</h1>
+      <div class="col-md-6 offset-md-3">
+          <form>
+            <div class="form-group">
+              <label for="create_table_name">Table Name</label>
+              <input type="text" class="form-control" id="create_table_name">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm float-right" id="create_table_btn">
+              Submit</button>
+          </form>
+      </div>
+    </div>
+
+    <div id="editTablePage" class="container">
+      <h1 class="text-info text-center my-5">Edit  Table</h1>
+      <div class="col-md-6 offset-md-3">
+          <form>
+            <div class="form-group">
+              <label for="edit_table_name"> Table Name</label>
+              <input type="text" class="form-control" id="edit_table_name">
+            </div>
+            <input type="hidden" class="form-control" id="edit_table_id">
+            <button type="submit" class="btn btn-primary btn-sm float-right" id="edit_table_btn">
+              Update</button>
+          </form>
+      </div>
+    </div>
+
+
+    <div id="createDishPage" class="container">
+      <h1 class="text-info text-center my-5">Create Dish</h1>
+      <div class="col-md-6 offset-md-3">
+          <form>
+            <div class="form-group">
+              <label for="create_dish_name">Dish Name</label>
+              <input type="text" class="form-control" id="create_dish_name">
+            </div>
+            <div class="form-group">
+              <label for="create_dish_price">Dish Price</label>
+              <input type="number" class="form-control" id="create_dish_price">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm float-right" id="create_dish_btn">
+              Submit</button>
+          </form>
+      </div>
+    </div>
+
+     <div id="editDishPage" class="container">
+      <h1 class="text-info text-center my-5">Edit  Table</h1>
+      <div class="col-md-6 offset-md-3">
+           <form>
+            <div class="form-group">
+              <label for="edit_dish_name">Dish Name</label>
+              <input type="text" class="form-control" id="edit_dish_name">
+            </div>
+            <div class="form-group">
+              <label for="edit_dish_price">Dish Price</label>
+              <input type="number" class="form-control" id="edit_dish_price">
+            </div>
+            <input type="hidden" class="form-control" id="edit_dish_id">
+            <button type="submit" class="btn btn-primary btn-sm float-right" id="edit_dish_btn">
+              Update</button>
+          </form>
+      </div>
+    </div>
+
+    <div id="createOrderPage" class="container">
+      <h1 class="text-info text-center my-5">Create Order Page</h1>
+      <div class="col-md-6 offset-md-3">
+          <form>
+            <div class="form-group">
+              <label for="create_order_table_name">Avaliable Table</label>
+              <select class="form-control" id="create_order_table_name">
+               
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="create_order_dish_name">Avaliable Dishes</label>
+              <select class="form-control" id="create_order_dish_name">
+               
+              </select>
+            </div>
+             <div class="form-group">
+              <label for="create_order_count">Order Count</label>
+              <input type="number" class="form-control" id="create_order_count">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm float-right" id="create_order_btn">
+              Submit</button>
+          </form>
+      </div>
+    </div>
+
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="app.js" ></script>
+    <script src="jquery.js"></script>
+   
+      <script src="eel.js"> </script>
+     <script src="main.js"></script>
+
+
+  </body>
+</html>

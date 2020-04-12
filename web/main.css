@@ -1,0 +1,5 @@
+@media print{
+    #printOrder{
+        background: rgb(214, 143, 143);
+    }
+}
